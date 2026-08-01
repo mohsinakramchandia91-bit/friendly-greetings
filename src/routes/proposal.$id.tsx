@@ -79,15 +79,14 @@ function PublicProposalPage() {
       clientName: proposal.client_name,
       projectTitle: proposal.project_title,
       content,
-      from: proposal.freelancer_email,
       signature,
     });
     doc.save(`${proposal.project_title || "proposal"}.pdf`);
   }
 
   return (
-    <main className="min-h-screen bg-background px-4 py-10 sm:px-6 sm:py-16">
-      <div className="mx-auto w-full max-w-2xl">
+    <main className="min-h-full bg-background px-5 py-8">
+      <div className="mx-auto w-full">
         <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
           Proposal
         </p>
@@ -96,7 +95,6 @@ function PublicProposalPage() {
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Prepared for {proposal.client_name || "you"}
-          {proposal.freelancer_email ? ` · from ${proposal.freelancer_email}` : ""}
         </p>
 
         <Card className="surface-card mt-8 rounded-2xl border-border/70">

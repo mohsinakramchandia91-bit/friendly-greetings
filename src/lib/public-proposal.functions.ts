@@ -23,7 +23,7 @@ export const getPublicProposal = createServerFn({ method: "GET" })
     const { data: row, error } = await supabaseAdmin
       .from("proposals")
       .select(
-        "id, user_id, client_name, project_title, content_json, amount, status, signature_data, created_at",
+        "id, client_name, project_title, content_json, amount, status, signature_data, created_at",
       )
       .eq("id", data.id)
       .maybeSingle();
@@ -31,11 +31,6 @@ export const getPublicProposal = createServerFn({ method: "GET" })
     if (error) throw new Error(error.message);
     if (!row || row.status === "draft") return null;
 
-    const { data: profile } = await supabaseAdmin
-      .from("profiles")
-      .select("email")
-      .eq("id", row.user_id)
-      .maybeSingle();
 
     return {
       id: row.id,
@@ -46,7 +41,6 @@ export const getPublicProposal = createServerFn({ method: "GET" })
       status: row.status,
       signature_data: row.signature_data,
       created_at: row.created_at,
-      freelancer_email: profile?.email ?? null,
     };
   });
 
