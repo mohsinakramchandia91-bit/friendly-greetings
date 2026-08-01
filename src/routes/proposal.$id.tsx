@@ -119,7 +119,7 @@ function PublicProposalPage() {
                           <p className="text-sm text-muted-foreground">{item.description}</p>
                         ) : null}
                       </div>
-                      <span className="tabular-nums font-medium">{formatCurrency(item.cost)}</span>
+                      <span className="numeric font-medium">{formatCurrency(item.cost)}</span>
                     </li>
                   ))}
                 </ul>
@@ -128,7 +128,7 @@ function PublicProposalPage() {
 
             <div className="flex items-center justify-between rounded-xl bg-secondary px-4 py-3">
               <span className="text-sm font-medium">Total</span>
-              <span className="text-2xl font-semibold tabular-nums">{formatCurrency(total)}</span>
+              <span className="numeric text-2xl font-semibold">{formatCurrency(total)}</span>
             </div>
 
             {content.terms ? <Section title="Terms" body={content.terms} /> : null}

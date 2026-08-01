@@ -310,7 +310,7 @@ function Editor() {
             <Separator />
             <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
               <span className="text-sm text-muted-foreground">Total</span>
-              <span className="shrink-0 text-2xl font-semibold tabular-nums">
+              <span className="shrink-0 numeric text-2xl font-semibold">
                 {formatCurrency(total)}
               </span>
             </div>
