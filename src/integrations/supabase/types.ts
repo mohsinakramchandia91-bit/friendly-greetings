@@ -14,24 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      profiles: {
-        Row: {
-          email: string | null
-          id: string
-          updated_at: string
-        }
-        Insert: {
-          email?: string | null
-          id: string
-          updated_at?: string
-        }
-        Update: {
-          email?: string | null
-          id?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
       proposals: {
         Row: {
           amount: number
@@ -39,13 +21,13 @@ export type Database = {
           content_json: Json
           created_at: string
           id: string
+          owner_token: string
           pdf_base64: string | null
           project_title: string
           signature_data: string | null
           signed_at: string | null
           status: Database["public"]["Enums"]["proposal_status"]
           updated_at: string
-          user_id: string
         }
         Insert: {
           amount?: number
@@ -53,13 +35,13 @@ export type Database = {
           content_json?: Json
           created_at?: string
           id?: string
+          owner_token: string
           pdf_base64?: string | null
           project_title?: string
           signature_data?: string | null
           signed_at?: string | null
           status?: Database["public"]["Enums"]["proposal_status"]
           updated_at?: string
-          user_id: string
         }
         Update: {
           amount?: number
@@ -67,13 +49,13 @@ export type Database = {
           content_json?: Json
           created_at?: string
           id?: string
+          owner_token?: string
           pdf_base64?: string | null
           project_title?: string
           signature_data?: string | null
           signed_at?: string | null
           status?: Database["public"]["Enums"]["proposal_status"]
           updated_at?: string
-          user_id?: string
         }
         Relationships: []
       }
