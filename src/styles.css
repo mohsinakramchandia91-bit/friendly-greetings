@@ -268,6 +268,7 @@
     transform 200ms ease;
   &:hover {
     box-shadow: var(--shadow-lifted);
+    transform: translateY(-2px);
   }
 }
 
