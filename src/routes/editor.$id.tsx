@@ -63,6 +63,8 @@ function Editor() {
     setToken(getDeviceToken());
     if (id === "new") {
       const fresh = newLocalDraft(crypto.randomUUID());
+      // Persist immediately so the editor can rehydrate after the redirect.
+      saveLocalDraft(fresh);
       setDocId(fresh.id);
       setDraft(fresh);
       hydrated.current = true;
@@ -72,6 +74,7 @@ function Editor() {
     const local = getLocalDraft(id);
     if (local) {
       setDraft(local);
+      setDocId(local.id);
       hydrated.current = true;
     }
   }, [id, navigate]);
