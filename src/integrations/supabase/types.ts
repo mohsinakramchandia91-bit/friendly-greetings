@@ -14,7 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          email: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          email?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          email?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      proposals: {
+        Row: {
+          amount: number
+          client_name: string
+          content_json: Json
+          created_at: string
+          id: string
+          pdf_base64: string | null
+          project_title: string
+          signature_data: string | null
+          signed_at: string | null
+          status: Database["public"]["Enums"]["proposal_status"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount?: number
+          client_name?: string
+          content_json?: Json
+          created_at?: string
+          id?: string
+          pdf_base64?: string | null
+          project_title?: string
+          signature_data?: string | null
+          signed_at?: string | null
+          status?: Database["public"]["Enums"]["proposal_status"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          client_name?: string
+          content_json?: Json
+          created_at?: string
+          id?: string
+          pdf_base64?: string | null
+          project_title?: string
+          signature_data?: string | null
+          signed_at?: string | null
+          status?: Database["public"]["Enums"]["proposal_status"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +85,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      proposal_status: "draft" | "sent" | "signed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +212,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      proposal_status: ["draft", "sent", "signed"],
+    },
   },
 } as const
