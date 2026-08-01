@@ -126,7 +126,7 @@ function Dashboard() {
   }
 
   return (
-    <div className="flex min-h-full flex-col bg-background">
+    <div className="flex min-h-full flex-col">
       <AppHeader />
       <main className="flex-1 px-5 py-6">
         <h1 className="text-2xl font-semibold">Proposals</h1>

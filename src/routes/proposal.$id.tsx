@@ -85,7 +85,7 @@ function PublicProposalPage() {
   }
 
   return (
-    <main className="min-h-full bg-background px-5 py-8">
+    <main className="min-h-full px-5 py-8">
       <div className="mx-auto w-full">
         <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
           Proposal
