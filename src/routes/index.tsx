@@ -5,16 +5,16 @@ import { Card, CardContent } from "@/components/ui/card";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ProposaLite — Proposals signed in minutes" },
+      { title: "ProposaLite — Proposals signed in minutes, no login" },
       {
         name: "description",
         content:
-          "A minimalist proposal builder and e-signature tool for freelancers. Draft, share a private link, get signed.",
+          "A minimalist proposal builder and e-signature tool for freelancers. No account: draft instantly, share a private link, get signed.",
       },
-      { property: "og:title", content: "ProposaLite — Proposals signed in minutes" },
+      { property: "og:title", content: "ProposaLite — No-login proposals & e-signatures" },
       {
         property: "og:description",
-        content: "Draft a proposal, share a private link, collect a signature. Free to run.",
+        content: "Draft instantly on this device, share a private link, collect a signature.",
       },
     ],
   }),
@@ -22,52 +22,50 @@ export const Route = createFileRoute("/")({
 });
 
 const steps = [
-  { title: "Draft", body: "Write the overview, scope and a pricing table that totals itself." },
-  { title: "Share", body: "Send a private link. No client account, no login, no friction." },
+  { title: "Draft", body: "Write scope and a pricing table that totals itself. Stays on device." },
+  { title: "Share", body: "One private link publishes it. No sign-up on either side." },
   { title: "Sign", body: "Your client signs on any device and you get the signed PDF." },
 ];
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background">
-      <header className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-5">
-        <span className="text-sm font-semibold tracking-tight">ProposaLite</span>
-        <Button variant="ghost" size="sm" asChild>
-          <Link to="/auth">Sign in</Link>
+    <div className="flex min-h-full flex-col bg-background px-5 pb-8 pt-6">
+      <header className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
+        <span className="truncate text-sm font-semibold tracking-tight">ProposaLite</span>
+        <Button variant="ghost" size="sm" asChild className="shrink-0">
+          <Link to="/dashboard">My proposals</Link>
         </Button>
       </header>
 
-      <main className="mx-auto w-full max-w-5xl px-5">
-        <section className="py-20 sm:py-28">
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-            For freelancers
-          </p>
-          <h1 className="mt-5 max-w-2xl text-4xl font-semibold leading-[1.05] sm:text-6xl">
-            Proposals that look expensive and get signed fast.
-          </h1>
-          <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-            Write it, send one private link, and collect a real signature — without invoicing
-            software, PDFs by email, or a monthly bill.
-          </p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <Button size="xl" asChild>
-              <Link to="/auth" search={{ mode: "signup" }}>
-                Start free
-              </Link>
-            </Button>
-            <Button size="xl" variant="outline" asChild>
-              <Link to="/auth">I have an account</Link>
-            </Button>
-          </div>
-        </section>
+      <main className="flex flex-1 flex-col justify-center py-10">
+        <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          No account. No friction.
+        </p>
+        <h1 className="mt-4 text-4xl font-semibold leading-[1.05]">
+          Proposals that look expensive and get signed fast.
+        </h1>
+        <p className="mt-4 text-base text-muted-foreground">
+          Start drafting the second you open the app. Everything stays on this device until you
+          share the link.
+        </p>
+        <div className="mt-7 space-y-3">
+          <Button size="xl" className="w-full" asChild>
+            <Link to="/editor/$id" params={{ id: "new" }}>
+              Start a proposal
+            </Link>
+          </Button>
+          <Button size="xl" variant="outline" className="w-full" asChild>
+            <Link to="/dashboard">View my proposals</Link>
+          </Button>
+        </div>
 
-        <section className="grid gap-4 pb-24 sm:grid-cols-3">
+        <section className="mt-10 space-y-3">
           {steps.map((step, index) => (
             <Card key={step.title} className="surface-card rounded-2xl border-border/70">
-              <CardContent className="py-7">
+              <CardContent className="py-5">
                 <span className="font-mono text-xs text-muted-foreground">0{index + 1}</span>
-                <h2 className="mt-3 text-lg font-semibold">{step.title}</h2>
-                <p className="mt-2 text-sm text-muted-foreground">{step.body}</p>
+                <h2 className="mt-2 text-lg font-semibold">{step.title}</h2>
+                <p className="mt-1 text-sm text-muted-foreground">{step.body}</p>
               </CardContent>
             </Card>
           ))}
