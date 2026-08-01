@@ -182,7 +182,7 @@ function Dashboard() {
                   </div>
                   <div className="mt-3 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
                     <div className="min-w-0">
-                      <p className="text-lg font-semibold tabular-nums">
+                      <p className="numeric text-lg font-semibold">
                         {formatCurrency(row.amount)}
                       </p>
                       <p className="truncate text-xs text-muted-foreground">
@@ -269,7 +269,7 @@ function Metric({
           <Skeleton className="mt-2 h-7 w-20" />
         ) : (
           <p
-            className={`mt-1 text-2xl font-semibold tabular-nums ${accent ? "text-success" : "text-foreground"}`}
+            className={`mt-1 numeric text-2xl font-semibold ${accent ? "text-success" : "text-foreground"}`}
           >
             {value}
           </p>

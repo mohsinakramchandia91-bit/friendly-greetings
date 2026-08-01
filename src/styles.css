@@ -122,38 +122,50 @@
 }
 
 .dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  --background: oklch(0.145 0.008 275);
+  --foreground: oklch(0.975 0.004 265);
+  --card: oklch(0.196 0.01 272);
+  --card-foreground: oklch(0.975 0.004 265);
+  --popover: oklch(0.196 0.01 272);
+  --popover-foreground: oklch(0.975 0.004 265);
+  --primary: oklch(0.62 0.212 272);
+  --primary-foreground: oklch(0.985 0.005 275);
+  --secondary: oklch(0.255 0.012 272);
+  --secondary-foreground: oklch(0.96 0.004 265);
+  --muted: oklch(0.245 0.011 272);
+  --muted-foreground: oklch(0.705 0.02 268);
+  --accent: oklch(0.28 0.045 272);
+  --accent-foreground: oklch(0.86 0.11 274);
+  --destructive: oklch(0.65 0.2 22);
+  --destructive-foreground: oklch(0.985 0.003 248);
+  --success: oklch(0.78 0.16 165);
+  --success-foreground: oklch(0.16 0.03 165);
+  --success-soft: oklch(0.32 0.07 165);
+  --info: oklch(0.78 0.13 235);
+  --info-soft: oklch(0.31 0.07 250);
+  --border: oklch(0.75 0.06 270 / 16%);
+  --input: oklch(0.75 0.06 270 / 20%);
+  --ring: oklch(0.62 0.212 272);
+  --shadow-resting: 0 1px 2px 0 oklch(0 0 0 / 0.5), 0 1px 3px 0 oklch(0 0 0 / 0.45);
+  --shadow-lifted: 0 10px 34px -14px oklch(0.62 0.212 272 / 0.55), 0 2px 8px oklch(0 0 0 / 0.5);
+  --shadow-frame:
+    0 0 0 1px oklch(0.62 0.212 272 / 0.12),
+    0 24px 60px -20px oklch(0 0 0 / 0.85),
+    0 60px 120px -40px oklch(0.62 0.212 272 / 0.35);
+  --gradient-surface: linear-gradient(180deg, oklch(0.215 0.011 272), oklch(0.185 0.009 272));
+  --chart-1: oklch(0.62 0.212 272);
+  --chart-2: oklch(0.7 0.15 195);
+  --chart-3: oklch(0.78 0.16 165);
+  --chart-4: oklch(0.75 0.17 320);
+  --chart-5: oklch(0.8 0.15 85);
+  --sidebar: oklch(0.176 0.009 272);
+  --sidebar-foreground: oklch(0.975 0.004 265);
+  --sidebar-primary: oklch(0.62 0.212 272);
+  --sidebar-primary-foreground: oklch(0.985 0.005 275);
+  --sidebar-accent: oklch(0.255 0.012 272);
+  --sidebar-accent-foreground: oklch(0.96 0.004 265);
+  --sidebar-border: oklch(0.75 0.06 270 / 16%);
+  --sidebar-ring: oklch(0.62 0.212 272);
 }
 
 @layer base {
@@ -276,4 +288,36 @@
   touch-action: none;
   -ms-touch-action: none;
   user-select: none;
+}
+
+
+/* --- Dark "developer SaaS" surface treatments --- */
+.dark .mesh-backdrop {
+  background-color: oklch(0.115 0.006 275);
+}
+
+.dark .mesh-backdrop::before {
+  background:
+    radial-gradient(40rem 40rem at 14% 6%, oklch(0.55 0.22 272 / 0.36), transparent 62%),
+    radial-gradient(36rem 36rem at 90% 16%, oklch(0.55 0.16 220 / 0.28), transparent 60%),
+    radial-gradient(46rem 46rem at 80% 98%, oklch(0.5 0.2 300 / 0.28), transparent 62%),
+    radial-gradient(30rem 30rem at 18% 92%, oklch(0.6 0.16 190 / 0.2), transparent 60%);
+}
+
+.dark .mesh-backdrop::after {
+  background-image: radial-gradient(oklch(0.85 0.05 270 / 0.14) 1px, transparent 1px);
+  opacity: 0.42;
+}
+
+.dark .glass-frame {
+  background-color: oklch(0.16 0.008 274 / 0.78);
+  border: 1px solid oklch(0.7 0.1 272 / 0.22);
+  outline: 1px solid oklch(0 0 0 / 0.6);
+}
+
+/* Engineered numerics: totals, amounts and metrics. */
+@utility numeric {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
 }

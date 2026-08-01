@@ -63,6 +63,8 @@ function Editor() {
     setToken(getDeviceToken());
     if (id === "new") {
       const fresh = newLocalDraft(crypto.randomUUID());
+      // Persist immediately so the editor can rehydrate after the redirect.
+      saveLocalDraft(fresh);
       setDocId(fresh.id);
       setDraft(fresh);
       hydrated.current = true;
@@ -72,6 +74,7 @@ function Editor() {
     const local = getLocalDraft(id);
     if (local) {
       setDraft(local);
+      setDocId(local.id);
       hydrated.current = true;
     }
   }, [id, navigate]);
@@ -307,7 +310,7 @@ function Editor() {
             <Separator />
             <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
               <span className="text-sm text-muted-foreground">Total</span>
-              <span className="shrink-0 text-2xl font-semibold tabular-nums">
+              <span className="shrink-0 numeric text-2xl font-semibold">
                 {formatCurrency(total)}
               </span>
             </div>
