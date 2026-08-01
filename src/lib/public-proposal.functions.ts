@@ -12,6 +12,12 @@ const signSchema = z.object({
     .max(400_000, "Signature image is too large"),
 });
 
+/** Never leak driver/database text to the browser. */
+function fail(context: string, error: unknown): never {
+  console.error(`[public-proposal] ${context}`, error);
+  throw new Error("Something went wrong, please try again.");
+}
+
 /**
  * Public read of a single proposal via its obfuscated UUID link.
  * Only non-sensitive columns are projected; anon has no direct table grants.
@@ -28,7 +34,7 @@ export const getPublicProposal = createServerFn({ method: "GET" })
       .eq("id", data.id)
       .maybeSingle();
 
-    if (error) throw new Error(error.message);
+    if (error) fail("getPublicProposal", error);
     if (!row || row.status === "draft") return null;
 
 
@@ -59,7 +65,7 @@ export const signPublicProposal = createServerFn({ method: "POST" })
       .eq("id", data.id)
       .maybeSingle();
 
-    if (readError) throw new Error(readError.message);
+    if (readError) fail("signPublicProposal.read", readError);
     if (!existing || existing.status === "draft") throw new Error("Proposal not found");
     if (existing.status === "signed") throw new Error("This proposal has already been signed");
 
@@ -73,6 +79,6 @@ export const signPublicProposal = createServerFn({ method: "POST" })
       .eq("id", data.id)
       .eq("status", "sent");
 
-    if (error) throw new Error(error.message);
+    if (error) fail("signPublicProposal.update", error);
     return { ok: true };
   });
