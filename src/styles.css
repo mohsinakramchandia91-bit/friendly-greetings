@@ -321,3 +321,11 @@
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
 }
+
+/* Hide the Lovable badge widget entirely (container, text and close button). */
+#lovable-badge,
+#lovable-badge * {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
