@@ -52,6 +52,7 @@
   --font-mono: var(--font-mono);
   --shadow-resting: var(--shadow-resting);
   --shadow-lifted: var(--shadow-lifted);
+  --shadow-frame: var(--shadow-frame);
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
