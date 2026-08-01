@@ -1,6 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { newLocalDraft, saveLocalDraft } from "@/lib/local-drafts";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,18 +30,32 @@ const steps = [
 ];
 
 function Index() {
+  const navigate = useNavigate();
+
+  function startProposal() {
+    const fresh = newLocalDraft(crypto.randomUUID());
+    saveLocalDraft(fresh);
+    navigate({ to: "/editor/$id", params: { id: fresh.id } });
+  }
+
   return (
     <div className="flex min-h-full flex-col px-5 pb-8 pt-6">
       <header className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
-        <span className="truncate text-sm font-semibold tracking-tight">ProposaLite</span>
-        <Button variant="ghost" size="sm" asChild className="shrink-0">
-          <Link to="/dashboard">My proposals</Link>
-        </Button>
+        <span className="flex min-w-0 items-center gap-2">
+          <span className="size-2 shrink-0 rounded-full bg-primary shadow-[0_0_12px_var(--primary)]" />
+          <span className="truncate text-sm font-semibold tracking-tight">ProposaLite</span>
+        </span>
+        <div className="flex shrink-0 items-center gap-1">
+          <Button variant="ghost" size="sm" asChild>
+            <Link to="/dashboard">My proposals</Link>
+          </Button>
+          <ThemeToggle />
+        </div>
       </header>
 
       <main className="flex flex-1 flex-col justify-center py-10">
-        <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
-          No account. No friction.
+        <p className="inline-flex w-fit items-center rounded-full border border-border/70 bg-card/60 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+          no account · no friction
         </p>
         <h1 className="mt-4 text-4xl font-semibold leading-[1.05]">
           Proposals that look expensive and get signed fast.
@@ -49,10 +65,8 @@ function Index() {
           share the link.
         </p>
         <div className="mt-7 space-y-3">
-          <Button size="xl" className="w-full" asChild>
-            <Link to="/editor/$id" params={{ id: "new" }}>
-              Start a proposal
-            </Link>
+          <Button size="xl" className="w-full" onClick={startProposal}>
+            Start a proposal
           </Button>
           <Button size="xl" variant="outline" className="w-full" asChild>
             <Link to="/dashboard">View my proposals</Link>
