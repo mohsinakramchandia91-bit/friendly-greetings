@@ -1,6 +1,19 @@
-import { useRef, useState } from "react";
-import SignatureCanvas from "react-signature-canvas";
+import { useRef, useState, type ComponentType } from "react";
+import SignatureCanvasBase from "react-signature-canvas";
 import { Button } from "@/components/ui/button";
+
+type SignaturePadHandle = {
+  clear: () => void;
+  isEmpty: () => boolean;
+  getCanvas: () => HTMLCanvasElement;
+};
+
+const SignatureCanvas = SignatureCanvasBase as unknown as ComponentType<{
+  ref?: React.Ref<SignaturePadHandle>;
+  penColor?: string;
+  onEnd?: () => void;
+  canvasProps?: Record<string, unknown>;
+}>;
 
 export default function SignaturePad({
   disabled,
@@ -9,7 +22,7 @@ export default function SignaturePad({
   disabled?: boolean;
   onSign: (dataUrl: string) => Promise<void> | void;
 }) {
-  const padRef = useRef<SignatureCanvas | null>(null);
+  const padRef = useRef<SignaturePadHandle | null>(null);
   const [empty, setEmpty] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 

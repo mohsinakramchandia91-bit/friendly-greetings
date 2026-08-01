@@ -1,5 +1,4 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
-import { ClientOnly } from "@tanstack/react-router";
+import { ClientOnly, createFileRoute, notFound, useRouter } from "@tanstack/react-router";
 import { lazy, Suspense, useState } from "react";
 import { toast } from "sonner";
 import { CheckCircle2, Download } from "lucide-react";
@@ -10,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { getPublicProposal, signPublicProposal } from "@/lib/public-proposal.functions";
 import { buildProposalPdf } from "@/lib/pdf";
 import { formatCurrency, totalOf } from "@/lib/proposal-types";
+import type { ProposalContent } from "@/lib/proposal-types";
 
 const SignaturePad = lazy(() => import("@/components/signature-pad"));
 
@@ -57,10 +57,10 @@ function ProposalMissing() {
 
 function PublicProposalPage() {
   const { proposal } = Route.useLoaderData();
-  const router = Route.useRouter();
+  const router = useRouter();
   const [signature, setSignature] = useState<string | null>(proposal.signature_data);
   const signed = proposal.status === "signed" || !!signature;
-  const content = proposal.content_json;
+  const content = proposal.content_json as ProposalContent;
   const total = content.items.length ? totalOf(content.items) : proposal.amount;
 
   async function handleSign(dataUrl: string) {
