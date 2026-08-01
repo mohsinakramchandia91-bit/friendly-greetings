@@ -126,9 +126,9 @@ function Dashboard() {
   }
 
   return (
-    <div className="min-h-full bg-background pb-24">
+    <div className="flex min-h-full flex-col bg-background">
       <AppHeader />
-      <main className="px-5 py-6">
+      <main className="flex-1 px-5 py-6">
         <h1 className="text-2xl font-semibold">Proposals</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Drafts live only on this device. Sending publishes the private client link.
@@ -217,7 +217,7 @@ function Dashboard() {
         </div>
       </main>
 
-      <div className="pointer-events-none sticky bottom-0 z-10 -mt-20 bg-gradient-to-t from-background via-background/90 to-transparent px-5 pb-6 pt-10">
+      <div className="pointer-events-none sticky bottom-0 z-10 bg-gradient-to-t from-background via-background to-transparent px-5 pb-6 pt-8">
         <Button
           size="lg"
           className="pointer-events-auto w-full"
