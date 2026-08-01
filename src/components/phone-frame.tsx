@@ -16,7 +16,7 @@ export function PhoneFrame({ children }: { children: ReactNode }) {
       >
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-white/60 to-transparent"
+          className="pointer-events-none absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-card/60 to-transparent"
         />
         <div className="h-full w-full overflow-y-auto overscroll-contain">
           <div key={pathname} className="route-enter min-h-full">
