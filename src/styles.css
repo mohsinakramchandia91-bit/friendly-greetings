@@ -100,6 +100,10 @@
   --font-mono: "Geist Mono", ui-monospace, monospace;
   --shadow-resting: 0 1px 2px 0 oklch(0.208 0.042 265 / 0.05), 0 1px 3px 0 oklch(0.208 0.042 265 / 0.06);
   --shadow-lifted: 0 8px 30px -12px oklch(0.208 0.042 265 / 0.22);
+  --shadow-frame:
+    0 1px 1px oklch(0.208 0.042 265 / 0.04),
+    0 12px 24px -12px oklch(0.208 0.042 265 / 0.18),
+    0 40px 80px -32px oklch(0.208 0.042 265 / 0.35);
   --gradient-surface: linear-gradient(180deg, oklch(1 0 0), oklch(0.985 0.004 265));
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
