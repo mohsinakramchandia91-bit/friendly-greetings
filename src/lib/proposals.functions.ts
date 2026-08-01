@@ -6,14 +6,38 @@ const token = z.string().uuid();
 
 const listSchema = z.object({ token });
 const idSchema = z.object({ token, id: z.string().uuid() });
+
+const contentSchema = z.object({
+  intro: z.string().max(5_000).default(""),
+  scope: z.string().max(10_000).default(""),
+  terms: z.string().max(5_000).default(""),
+  items: z
+    .array(
+      z.object({
+        id: z.string().max(64),
+        item: z.string().max(200),
+        description: z.string().max(1_000),
+        cost: z.number().nonnegative().max(100_000_000),
+      }),
+    )
+    .max(100)
+    .default([]),
+});
+
 const saveSchema = z.object({
   token,
   id: z.string().uuid(),
   clientName: z.string().max(200),
   projectTitle: z.string().max(200),
-  content: z.unknown(),
+  content: contentSchema,
   amount: z.number().nonnegative().max(100_000_000),
 });
+
+/** Never leak driver/database text to the browser. */
+function fail(context: string, error: unknown): never {
+  console.error(`[proposals] ${context}`, error);
+  throw new Error("Something went wrong, please try again.");
+}
 
 export type OwnedProposal = {
   id: string;
@@ -38,7 +62,7 @@ export const listMyProposals = createServerFn({ method: "GET" })
       )
       .eq("owner_token", data.token)
       .order("created_at", { ascending: false });
-    if (error) throw new Error(error.message);
+    if (error) fail("listMyProposals", error);
     return (rows ?? []).map((row) => ({
       ...row,
       amount: Number(row.amount),
@@ -58,7 +82,7 @@ export const getMyProposal = createServerFn({ method: "GET" })
       .eq("id", data.id)
       .eq("owner_token", data.token)
       .maybeSingle();
-    if (error) throw new Error(error.message);
+    if (error) fail("getMyProposal", error);
     if (!row) return null;
     return { ...row, amount: Number(row.amount), content_json: normalizeContent(row.content_json) };
   });
@@ -74,7 +98,7 @@ export const publishProposal = createServerFn({ method: "POST" })
       .select("id, owner_token, status")
       .eq("id", data.id)
       .maybeSingle();
-    if (readError) throw new Error(readError.message);
+    if (readError) fail("publishProposal.read", readError);
     if (existing && existing.owner_token !== data.token) {
       throw new Error("This proposal belongs to another device");
     }
@@ -93,7 +117,7 @@ export const publishProposal = createServerFn({ method: "POST" })
     };
 
     const { error } = await supabaseAdmin.from("proposals").upsert(payload, { onConflict: "id" });
-    if (error) throw new Error(error.message);
+    if (error) fail("publishProposal.upsert", error);
     return { id: data.id };
   });
 
@@ -106,6 +130,6 @@ export const deleteMyProposal = createServerFn({ method: "POST" })
       .delete()
       .eq("id", data.id)
       .eq("owner_token", data.token);
-    if (error) throw new Error(error.message);
+    if (error) fail("deleteMyProposal", error);
     return { ok: true };
   });
