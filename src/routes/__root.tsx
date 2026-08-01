@@ -80,21 +80,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { title: "ProposaLite — Proposals & e-signatures for freelancers" },
+      { title: "ProposaLite — Proposals signed in minutes, no login" },
       {
         name: "description",
         content:
-          "Write premium client proposals, share a private link, and collect a legally clear signature in minutes.",
+          "A minimalist proposal builder and e-signature tool for freelancers. No account: draft instantly, share a private link, get signed.",
       },
       { name: "author", content: "ProposaLite" },
-      { property: "og:title", content: "ProposaLite — Proposals & e-signatures" },
+      { property: "og:title", content: "ProposaLite — Proposals signed in minutes, no login" },
       {
         property: "og:description",
-        content: "Write proposals, share a private link, get signed. Built for freelancers.",
+        content: "A minimalist proposal builder and e-signature tool for freelancers. No account: draft instantly, share a private link, get signed.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "ProposaLite — Proposals signed in minutes, no login" },
+      { name: "twitter:description", content: "A minimalist proposal builder and e-signature tool for freelancers. No account: draft instantly, share a private link, get signed." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/eb529fe3-4227-4ad7-8225-30c852a48b59" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/eb529fe3-4227-4ad7-8225-30c852a48b59" },
     ],
     links: [
       {

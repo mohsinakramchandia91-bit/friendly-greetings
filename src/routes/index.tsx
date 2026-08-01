@@ -13,10 +13,10 @@ export const Route = createFileRoute("/")({
         content:
           "A minimalist proposal builder and e-signature tool for freelancers. No account: draft instantly, share a private link, get signed.",
       },
-      { property: "og:title", content: "ProposaLite — No-login proposals & e-signatures" },
+      { property: "og:title", content: "ProposaLite — Proposals signed in minutes, no login" },
       {
         property: "og:description",
-        content: "Draft instantly on this device, share a private link, collect a signature.",
+        content: "A minimalist proposal builder and e-signature tool for freelancers. No account: draft instantly, share a private link, get signed.",
       },
     ],
   }),
