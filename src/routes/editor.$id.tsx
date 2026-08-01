@@ -173,7 +173,7 @@ function Editor() {
 
   if (!draft) {
     return (
-      <div className="min-h-full bg-background">
+      <div className="min-h-full">
         <AppHeader />
         <main className="space-y-4 px-5 py-6">
           <Skeleton className="h-9 w-48" />
@@ -190,7 +190,7 @@ function Editor() {
   }
 
   return (
-    <div className="min-h-full bg-background pb-6">
+    <div className="min-h-full pb-6">
       <AppHeader />
       <main className="px-5 py-5">
         <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-2">

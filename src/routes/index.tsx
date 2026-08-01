@@ -29,7 +29,7 @@ const steps = [
 
 function Index() {
   return (
-    <div className="flex min-h-full flex-col bg-background px-5 pb-8 pt-6">
+    <div className="flex min-h-full flex-col px-5 pb-8 pt-6">
       <header className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
         <span className="truncate text-sm font-semibold tracking-tight">ProposaLite</span>
         <Button variant="ghost" size="sm" asChild className="shrink-0">
