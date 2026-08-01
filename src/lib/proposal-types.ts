@@ -23,7 +23,6 @@ export type PublicProposal = {
   status: ProposalStatus;
   signature_data: string | null;
   created_at: string;
-  freelancer_email: string | null;
 };
 
 export const emptyContent = (): ProposalContent => ({

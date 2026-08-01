@@ -10,84 +10,62 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as EditorIdRouteImport } from './routes/editor.$id'
 import { Route as ProposalIdRouteImport } from './routes/proposal.$id'
-import { Route as AuthenticatedEditorIdRouteImport } from './routes/_authenticated/editor.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
-  getParentRoute: () => AuthenticatedRouteRoute,
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EditorIdRoute = EditorIdRouteImport.update({
+  id: '/editor/$id',
+  path: '/editor/$id',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ProposalIdRoute = ProposalIdRouteImport.update({
   id: '/proposal/$id',
   path: '/proposal/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedEditorIdRoute = AuthenticatedEditorIdRouteImport.update({
-  id: '/editor/$id',
-  path: '/editor/$id',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
-  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/dashboard': typeof DashboardRoute
+  '/editor/$id': typeof EditorIdRoute
   '/proposal/$id': typeof ProposalIdRoute
-  '/editor/$id': typeof AuthenticatedEditorIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
-  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/dashboard': typeof DashboardRoute
+  '/editor/$id': typeof EditorIdRoute
   '/proposal/$id': typeof ProposalIdRoute
-  '/editor/$id': typeof AuthenticatedEditorIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/auth': typeof AuthRoute
-  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/dashboard': typeof DashboardRoute
+  '/editor/$id': typeof EditorIdRoute
   '/proposal/$id': typeof ProposalIdRoute
-  '/_authenticated/editor/$id': typeof AuthenticatedEditorIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard' | '/proposal/$id' | '/editor/$id'
+  fullPaths: '/' | '/dashboard' | '/editor/$id' | '/proposal/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/proposal/$id' | '/editor/$id'
-  id:
-    | '__root__'
-    | '/'
-    | '/_authenticated'
-    | '/auth'
-    | '/_authenticated/dashboard'
-    | '/proposal/$id'
-    | '/_authenticated/editor/$id'
+  to: '/' | '/dashboard' | '/editor/$id' | '/proposal/$id'
+  id: '__root__' | '/' | '/dashboard' | '/editor/$id' | '/proposal/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
-  AuthRoute: typeof AuthRoute
+  DashboardRoute: typeof DashboardRoute
+  EditorIdRoute: typeof EditorIdRoute
   ProposalIdRoute: typeof ProposalIdRoute
 }
 
@@ -100,26 +78,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/dashboard': {
-      id: '/_authenticated/dashboard'
+    '/dashboard': {
+      id: '/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/editor/$id': {
+      id: '/editor/$id'
+      path: '/editor/$id'
+      fullPath: '/editor/$id'
+      preLoaderRoute: typeof EditorIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/proposal/$id': {
       id: '/proposal/$id'
@@ -128,33 +99,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProposalIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/editor/$id': {
-      id: '/_authenticated/editor/$id'
-      path: '/editor/$id'
-      fullPath: '/editor/$id'
-      preLoaderRoute: typeof AuthenticatedEditorIdRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
   }
 }
 
-interface AuthenticatedRouteRouteChildren {
-  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
-  AuthenticatedEditorIdRoute: typeof AuthenticatedEditorIdRoute
-}
-
-const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
-  AuthenticatedEditorIdRoute: AuthenticatedEditorIdRoute,
-}
-
-const AuthenticatedRouteRouteWithChildren =
-  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
-  AuthRoute: AuthRoute,
+  DashboardRoute: DashboardRoute,
+  EditorIdRoute: EditorIdRoute,
   ProposalIdRoute: ProposalIdRoute,
 }
 export const routeTree = rootRouteImport
