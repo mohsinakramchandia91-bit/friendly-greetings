@@ -159,5 +159,30 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
   }
+
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility surface-card {
+  background-image: var(--gradient-surface);
+  box-shadow: var(--shadow-resting);
+  transition:
+    box-shadow 200ms ease,
+    transform 200ms ease;
+  &:hover {
+    box-shadow: var(--shadow-lifted);
+  }
+}
+
+@utility signature-pad {
+  touch-action: none;
+  -ms-touch-action: none;
+  user-select: none;
 }
